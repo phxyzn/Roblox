@@ -1,0 +1,37 @@
+--[[
+
+    Last Updated : 25 Feb 2026
+
+    License:
+        Free for personal use and personal modification.
+        Redistribution of modified versions is NOT permitted.
+
+    Executor Closures Used:
+        • identifyexecutor          (line 15)
+        • gethui                    (line 19)
+
+]]
+
+if identifyexecutor() ~= "Delta" then return; end
+
+local i = 2;
+
+for _, v in pairs(gethui():GetChildren()) do
+    if v:IsA("ScreenGui") then
+
+        local ImageButton = v:FindFirstChildOfClass("ImageButton");
+
+        if ImageButton and tostring(ImageButton.Image):find("new_logo.png", 1, true) then
+            v.Enabled = false;
+            i-=1;
+        end
+
+        if v:FindFirstChild("Console") and v:FindFirstChild("IsTween") and v:FindFirstChild("Executor") then
+            v.Enabled = false;
+            i-=1;
+        end
+
+        if i == 0 then break; end
+
+    end
+end
